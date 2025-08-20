@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { FaEnvelope, FaPhone, FaLinkedin } from "react-icons/fa";
-import { EarthCanvas } from "./canvas"; // ✅ Added here
+import { EarthCanvas } from "./canvas";
 
 const ContactCard = ({ label, value, icon: Icon, onClick }) => {
   const [copied, setCopied] = useState(false);
@@ -18,16 +18,16 @@ const ContactCard = ({ label, value, icon: Icon, onClick }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="bg-tertiary p-8 rounded-2xl w-full sm:w-[320px] flex flex-col items-center cursor-pointer relative shadow-lg hover:shadow-2xl transition-shadow duration-300"
+      className="bg-tertiary p-6 sm:p-8 rounded-2xl w-full sm:w-[280px] flex flex-col items-center cursor-pointer relative shadow-lg hover:shadow-2xl transition-shadow duration-300"
       onClick={handleClick}
     >
-      <div className="text-5xl mb-4 text-blue-400">
+      <div className="text-4xl sm:text-5xl mb-4 text-blue-400">
         <Icon />
       </div>
-      <h3 className="text-white text-xl font-bold mb-3">{label}</h3>
-      <p className="text-secondary text-center">{value}</p>
+      <h3 className="text-white text-lg sm:text-xl font-bold mb-2 sm:mb-3">{label}</h3>
+      <p className="text-secondary text-center text-sm sm:text-base">{value}</p>
       {copied && (
-        <span className="absolute top-2 right-2 text-green-400 text-sm">
+        <span className="absolute top-2 right-2 text-green-400 text-xs sm:text-sm">
           Copied!
         </span>
       )}
@@ -36,17 +36,15 @@ const ContactCard = ({ label, value, icon: Icon, onClick }) => {
 };
 
 const Contact = () => {
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text);
-  };
+  const handleCopy = (text) => navigator.clipboard.writeText(text);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-12 bg-black-100 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-8 sm:gap-12 bg-black-100 p-6">
       {/* Text Section */}
       <motion.div className="text-center max-w-xl">
         <p className={styles.sectionSubText}>Get in touch</p>
         <h2 className={styles.sectionHeadText}>Contact Me</h2>
-        <p className="mt-4 text-secondary">
+        <p className="mt-4 text-secondary text-sm sm:text-base">
           Hi! I’m Yanes Hadiouche, a passionate Web Developer. Feel free to
           reach out via email, phone, or LinkedIn. I’d love to hear about your
           project or just connect!
@@ -54,7 +52,7 @@ const Contact = () => {
       </motion.div>
 
       {/* Contact Cards */}
-      <div className="flex flex-wrap justify-center gap-10 mt-8">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-6 sm:mt-8">
         <ContactCard
           label="Email"
           value="Yanes75@hotmail.fr"
@@ -81,7 +79,7 @@ const Contact = () => {
       </div>
 
       {/* Earth Animation */}
-      <div className="w-full h-[400px] mt-12">
+      <div className="w-full h-[300px] sm:h-[400px] mt-8 sm:mt-12">
         <EarthCanvas />
       </div>
     </div>

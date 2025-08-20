@@ -27,29 +27,30 @@ const offers = [
 const OfferCard = ({ index, title, details, price }) => (
   <motion.div
     variants={fadeIn("up", "spring", index * 0.3, 0.7)}
-    className="bg-tertiary p-8 rounded-2xl w-full sm:w-[320px] min-h-[450px] shadow-lg flex flex-col justify-between hover:scale-105 transition-transform"
+    className="bg-tertiary p-6 sm:p-8 rounded-2xl w-full sm:w-[320px] min-h-[420px] shadow-lg flex flex-col justify-between 
+      hover:scale-105 transition-transform sm:hover:scale-105"
   >
     <div>
-      <h3 className="text-white text-2xl font-bold mb-6">{title}</h3>
-      <p className="text-secondary text-sm leading-relaxed text-justify mb-3">{details}</p>
+      <h3 className="text-white text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{title}</h3>
+      <p className="text-secondary text-sm sm:text-[14px] leading-relaxed text-justify mb-3">{details}</p>
     </div>
-    <div className="text-center">
-      <span className="text-white font-extrabold text-3xl">{price}</span>
+    <div className="text-center mt-4 sm:mt-0">
+      <span className="text-white font-extrabold text-2xl sm:text-3xl">{price}</span>
     </div>
   </motion.div>
 );
 
 const Offers = () => {
   return (
-    <div className={`mt-16 bg-black-100 rounded-[20px]`}>
-      <div className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[200px]`}>
+    <div className="mt-16 bg-black-100 rounded-[20px]">
+      <div className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[130px] sm:min-h-[150px]`}>
         <motion.div variants={textVariant()}>
           <p className={styles.sectionSubText}>My Services</p>
-          <h2 className={`${styles.sectionHeadText} mb-12`}>Web Development Offers.</h2>
+          <h2 className={`${styles.sectionHeadText} mb-8 sm:mb-12`}>Web Development Offers.</h2>
         </motion.div>
       </div>
 
-      <div className={`-mt-24 pb-14 ${styles.paddingX} flex flex-wrap gap-10 justify-center`}>
+      <div className={`mt-10 sm:mt-12 pb-10 sm:pb-14 ${styles.paddingX} flex flex-wrap gap-6 sm:gap-10 justify-center`}>
         {offers.map((offer, index) => (
           <OfferCard key={offer.title} index={index} {...offer} />
         ))}

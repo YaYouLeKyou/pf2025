@@ -7,7 +7,7 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "D:\\react projects\\project_3D_developer_portfolio-main - Copie\\dist"
+publish = "C:\\Users\\Hadiouche\\Documents\\GitHub\\pf2025\\dist"
 publishOrigin = "ui"
 commandOrigin = "ui"
 command = "npm run build"
