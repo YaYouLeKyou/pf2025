@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { FaEnvelope, FaPhone, FaLinkedin } from "react-icons/fa";
@@ -38,14 +38,28 @@ const ContactCard = ({ label, value, icon: Icon, onClick }) => {
 };
 
 const Contact = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleChange = (event) => setIsMobile(event.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   const handleCopy = (text) => navigator.clipboard.writeText(text);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center gap-8 sm:gap-12 bg-black-100 p-6">
-      {/* Stars background behind contact */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <StarsCanvas />
-      </div>
+      {/* Stars background behind contact (hidden on mobile) */}
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <StarsCanvas />
+        </div>
+      )}
 
       {/* Main content on top */}
       <div className="relative z-10 w-full">
@@ -87,10 +101,12 @@ const Contact = () => {
           />
         </div>
 
-        {/* Earth Animation */}
-        <div className="w-full h-[300px] sm:h-[400px] mt-8 sm:mt-12">
-          <EarthCanvas />
-        </div>
+        {/* Earth Animation (hidden on mobile) */}
+        {!isMobile && (
+          <div className="w-full h-[300px] sm:h-[400px] mt-8 sm:mt-12">
+            <EarthCanvas />
+          </div>
+        )}
       </div>
     </div>
   );
