@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import { styles } from "../styles";
@@ -26,33 +26,45 @@ const offers = [
 ];
 
 const OfferCard = ({ index, title, details, price, isMobile }) => {
+  const cardClasses = isMobile
+    ? "bg-tertiary p-4 rounded-xl w-full max-w-sm min-h-[320px] flex flex-col justify-between"
+    : "bg-tertiary p-8 rounded-2xl w-[360px] min-h-[420px] shadow-lg flex flex-col justify-between";
+
+  const textClasses = "text-secondary text-[14px] leading-relaxed text-left break-words";
+
+  const titleClasses = isMobile
+    ? "text-white text-lg font-bold mb-3"
+    : "text-white text-2xl font-bold mb-6";
+
+  const priceClasses = isMobile
+    ? "text-white font-extrabold text-xl"
+    : "text-white font-extrabold text-3xl";
+
   if (isMobile) {
-    // ✅ Plain <div> on mobile (no motion, no shadows)
     return (
-      <div className="bg-tertiary p-4 rounded-xl w-full min-h-[320px] flex flex-col justify-between">
+      <div className={cardClasses}>
         <div>
-          <h3 className="text-white text-lg font-bold mb-3">{title}</h3>
-          <p className="text-secondary text-sm leading-relaxed text-left">{details}</p>
+          <h3 className={titleClasses}>{title}</h3>
+          <p className={textClasses}>{details}</p>
         </div>
         <div className="text-center mt-3">
-          <span className="text-white font-extrabold text-xl">{price}</span>
+          <span className={priceClasses}>{price}</span>
         </div>
       </div>
     );
   }
 
-  // ✅ Motion + shadows only on desktop
   return (
     <motion.div
       variants={fadeIn("up", "spring", index * 0.2, 0.6)}
-      className="bg-tertiary p-8 rounded-2xl w-[320px] min-h-[420px] shadow-lg flex flex-col justify-between"
+      className={cardClasses}
     >
       <div>
-        <h3 className="text-white text-2xl font-bold mb-6">{title}</h3>
-        <p className="text-secondary text-[14px] leading-relaxed text-justify">{details}</p>
+        <h3 className={titleClasses}>{title}</h3>
+        <p className={textClasses}>{details}</p>
       </div>
       <div className="text-center mt-4">
-        <span className="text-white font-extrabold text-3xl">{price}</span>
+        <span className={priceClasses}>{price}</span>
       </div>
     </motion.div>
   );
@@ -75,7 +87,7 @@ const Offers = () => {
 
       {/* Cards */}
       <div
-        className={`mt-8 pb-10 ${styles.paddingX} flex flex-col sm:flex-row gap-6 sm:gap-10 items-center sm:justify-center`}
+        className={`mt-8 pb-10 ${styles.paddingX} flex flex-col sm:flex-row flex-wrap gap-6 sm:gap-10 items-center sm:justify-center`}
       >
         {offers.map((offer, index) => (
           <OfferCard key={offer.title} index={index} {...offer} isMobile={isMobile} />
